@@ -25,4 +25,6 @@ public interface UserRespository {
     User save(User user);
 
     void deleteId(int id);
+
+    User findByEmailAddress(String emailAddress);
 }

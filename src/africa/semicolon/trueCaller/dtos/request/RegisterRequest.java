@@ -1,12 +1,6 @@
-package africa.semicolon.trueCaller.models;
+package africa.semicolon.trueCaller.dtos.request;
 
-import africa.semicolon.trueCaller.repositories.ContactRepositoryImpl;
-import africa.semicolon.trueCaller.repositories.ContactRespository;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class User {
+public class RegisterRequest {
 
     private int id;
     private String password;
@@ -14,10 +8,23 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String emailAddress;
-    private String homeAddress;
 
-    private List<Contact> contacts = new ArrayList<>();
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -50,30 +57,4 @@ public class User {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
-

@@ -6,10 +6,11 @@ import africa.semicolon.trueCaller.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepositoryImpl implements UserRespository { ;
-        private int count ;
+public class UserRepositoryImpl implements UserRespository {
+    ;
     private final List<User> myUsers = new ArrayList<>();
     private final ArrayList<Contact> myContacts = new ArrayList<>();
+    private int count;
 
     @Override
     public void addContact(Contact newContact) {
@@ -30,7 +31,6 @@ public class UserRepositoryImpl implements UserRespository { ;
 
     @Override
     public User getContact(int index) {
-
         return myUsers.get(index);
     }
 
@@ -47,27 +47,39 @@ public class UserRepositoryImpl implements UserRespository { ;
 
     @Override
     public User save(User user) {
-        for(User use : myUsers){
-            if(use.getFirstName() == use.getFirstName()){
-                return use;
-            }
+        if (user.getId() > 0) {
+            User foundUser = findByEmailAddress(user.getEmailAddress());
+            myUsers.remove(foundUser);
+            myUsers.add(user);
+           // myUsers.add()
+            //update
+        } else {
+            count++;
+            user.setId(count);
+            myUsers.add(user);
         }
-
-       count++;
-        user.setId(count);
-        myUsers.add(user);
         return user;
-
     }
 
     @Override
     public void deleteId(int id) {
-        for (int i = 0; i < myUsers.size() ; i++) {
-            if(myUsers.get(i).getId()== id){
+        for (int i = 0; i < myUsers.size(); i++) {
+            if (myUsers.get(i).getId() == id) {
                 myUsers.remove(id);
             }
         }
-        count--;
+    }
+
+    @Override
+    public User findByEmailAddress(String emailAddress) {
+        for (User user : myUsers) {
+            if (emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
+                return user;
+
+            }
+
+        }
+        return null;
     }
 
 

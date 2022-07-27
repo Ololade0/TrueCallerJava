@@ -9,12 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepositoryImplTest {
     User user;
+    User user2;
     UserRespository userRespository;
 
     @BeforeEach
     void setUp(){
 
          user = new User();
+         user2 = new User();
          userRespository = new UserRepositoryImpl();
     }
 
@@ -53,7 +55,10 @@ class UserRepositoryImplTest {
         user.setLastName("Tosin");
         user.setId(1);
         user.setId(2);
+        user2.setId(3);
+        user2.setId(4);
         userRespository.save(user);
+        userRespository.save(user2);
         userRespository.deleteId(2);
         assertEquals(1, userRespository.count());
     }
