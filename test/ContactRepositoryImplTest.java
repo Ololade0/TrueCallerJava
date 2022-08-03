@@ -1,6 +1,6 @@
-import africa.semicolon.trueCaller.models.Contact;
-import africa.semicolon.trueCaller.repositories.ContactRepositoryImpl;
-import africa.semicolon.trueCaller.repositories.ContactRespository;
+import africa.semicolon.trueCaller.data.repositories.models.Contact;
+import africa.semicolon.trueCaller.data.repositories.ContactRepositoryImpl;
+import africa.semicolon.trueCaller.data.repositories.ContactRespository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +28,6 @@ class ContactRepositoryImplTest {
         contact.setEmail("ola@");
         contactRespositories.save(contact);
         assertEquals(1, contactRespositories.count());
-
         Contact savedContact = contactRespositories.findById(1);
         assertEquals("Ololade", savedContact.getFirstName());
     }

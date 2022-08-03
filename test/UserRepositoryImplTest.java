@@ -1,7 +1,7 @@
 
-import africa.semicolon.trueCaller.models.User;
-import africa.semicolon.trueCaller.repositories.UserRepositoryImpl;
-import africa.semicolon.trueCaller.repositories.UserRespository;
+import africa.semicolon.trueCaller.data.repositories.models.User;
+import africa.semicolon.trueCaller.data.repositories.UserRepositoryImpl;
+import africa.semicolon.trueCaller.data.repositories.UserRespository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class UserRepositoryImplTest {
     }
 
     @Test
-    void testThatUserCanbeBeCreated() {
+    void testThatUserCanBeCreated() {
         User user = new User();
         User user1 = new User();
         user.setFirstName("Ololade");
@@ -31,6 +31,8 @@ class UserRepositoryImplTest {
         user1.setLastName("Dems");
         user1.setEmailAddress("Dems@");
         assertEquals("Ololade", user.getFirstName());
+        assertEquals("Ola", user1.getFirstName());
+
     }
 
     @Test
@@ -52,17 +54,19 @@ class UserRepositoryImplTest {
 
     @Test
     void testThatUserCanDeleteContactById() {
-        user.setLastName("Tosin");
-        user.setId(1);
-        user.setId(2);
-        user2.setId(3);
-        user2.setId(4);
+        user.setFirstName("Ololade");
+        user.setLastName("Demilade");
+        user.setEmailAddress("Olyn@");
+
+        user2.setFirstName("asake");
+        user2.setLastName("lol");
+        user2.setEmailAddress("Olyn@asake");
+
         userRespository.save(user);
         userRespository.save(user2);
-        userRespository.deleteId(2);
+        userRespository.deleteId(user.getId());
         assertEquals(1, userRespository.count());
     }
-
     @Test
     void testThatUserCanGetAllContact() {
         user.setFirstName("Ololade");
@@ -85,6 +89,8 @@ class UserRepositoryImplTest {
         assertEquals("Jummy", userRespository.getContact(0).getLastName());
 
     }
+
+
     }
 
 

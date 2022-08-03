@@ -1,7 +1,4 @@
-package africa.semicolon.trueCaller.models;
-
-import africa.semicolon.trueCaller.repositories.ContactRepositoryImpl;
-import africa.semicolon.trueCaller.repositories.ContactRespository;
+package africa.semicolon.trueCaller.data.repositories.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +72,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
 }
 

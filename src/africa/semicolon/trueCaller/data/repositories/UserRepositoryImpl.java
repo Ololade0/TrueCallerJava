@@ -1,7 +1,7 @@
-package africa.semicolon.trueCaller.repositories;
+package africa.semicolon.trueCaller.data.repositories;
 
-import africa.semicolon.trueCaller.models.Contact;
-import africa.semicolon.trueCaller.models.User;
+import africa.semicolon.trueCaller.data.repositories.models.Contact;
+import africa.semicolon.trueCaller.data.repositories.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,6 @@ public class UserRepositoryImpl implements UserRespository {
 
     @Override
     public void deleteContact(User user1) {
-
         myUsers.remove(user1);
     }
 
@@ -63,12 +62,10 @@ public class UserRepositoryImpl implements UserRespository {
 
     @Override
     public void deleteId(int id) {
-        for (int i = 0; i < myUsers.size(); i++) {
-            if (myUsers.get(i).getId() == id) {
-                myUsers.remove(id);
+                myUsers.removeIf(user -> user.getId()==id);
             }
-        }
-    }
+
+
 
     @Override
     public User findByEmailAddress(String emailAddress) {
@@ -78,6 +75,16 @@ public class UserRepositoryImpl implements UserRespository {
 
             }
 
+        }
+        return null;
+    }
+
+    @Override
+    public User findByEmail(String userEmail) {
+        for (User myUser : myUsers) {
+            if (myUser.getEmailAddress().equalsIgnoreCase(userEmail)) {
+                return myUser;
+            }
         }
         return null;
     }

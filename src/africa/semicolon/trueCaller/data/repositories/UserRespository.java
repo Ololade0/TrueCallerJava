@@ -1,7 +1,7 @@
-package africa.semicolon.trueCaller.repositories;
+package africa.semicolon.trueCaller.data.repositories;
 
-import africa.semicolon.trueCaller.models.Contact;
-import africa.semicolon.trueCaller.models.User;
+import africa.semicolon.trueCaller.data.repositories.models.Contact;
+import africa.semicolon.trueCaller.data.repositories.models.User;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ public interface UserRespository {
 
 
     int count();
-
     void deleteContact(User user1);
 
     User getContact(int index);
@@ -26,5 +25,7 @@ public interface UserRespository {
 
     void deleteId(int id);
 
-    User findByEmailAddress(String emailAddress);
+     User findByEmailAddress(String emailAddress);
+
+    User findByEmail(String userEmail);
 }

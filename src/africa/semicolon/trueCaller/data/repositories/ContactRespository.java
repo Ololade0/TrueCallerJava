@@ -1,6 +1,6 @@
-package africa.semicolon.trueCaller.repositories;
+package africa.semicolon.trueCaller.data.repositories;
 
-import africa.semicolon.trueCaller.models.Contact;
+import africa.semicolon.trueCaller.data.repositories.models.Contact;
 
 import java.util.List;
 
@@ -8,11 +8,10 @@ public interface ContactRespository {
     Contact save(Contact contact);
     void deleteContact(Contact contact1);
 
-    void delete(int id);
+    Contact delete(int id);
     Contact findById(int id);
     List<Contact> findAll();
     int count();
-
 
 
 

@@ -1,6 +1,6 @@
-package africa.semicolon.trueCaller.repositories;
+package africa.semicolon.trueCaller.data.repositories;
 
-import africa.semicolon.trueCaller.models.Contact;
+import africa.semicolon.trueCaller.data.repositories.models.Contact;
 //import jdk.internal.icu.text.UnicodeSet;
 
 import java.util.ArrayList;
@@ -23,12 +23,10 @@ public class ContactRepositoryImpl implements ContactRespository {
         return contact;
     }
 
-
-
-
     @Override
-    public void delete(int id) {
-        contacts.remove(id-1);
+    public Contact delete(int id) {
+        contacts.removeIf(contact -> contact.getId() == id);
+        return null;
     }
 
 
@@ -55,7 +53,8 @@ public class ContactRepositoryImpl implements ContactRespository {
 
     @Override
     public void deleteContact(Contact contact1) {
-        contacts.remove(contact1);
+        contacts.removeIf(contact -> contact == contact1);
+
     }
 
 
