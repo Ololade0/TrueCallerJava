@@ -6,6 +6,7 @@ import africa.semicolon.trueCaller.dtos.responses.AllContactResponse;
 import africa.semicolon.trueCaller.dtos.responses.RegisterUserResponse;
 import africa.semicolon.trueCaller.exception.UserExistsException;
 import africa.semicolon.trueCaller.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserService userService = new UserService();
+    @Autowired
+    private UserService userService;
 @PostMapping("/user")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
     try {

@@ -15,13 +15,7 @@ public interface  iUserService {
     RegisterUserResponse register(RegisterRequest registerRequest);
 
     AddContactResponse addContact(AddContactRequest request);
-
-    int getNumberOfUsers();
-
-    int size();
-
     public List<AllContactResponse> findContactBelongingTo(String userEmail);
-
 
     User getUserByEmail(String email);
 

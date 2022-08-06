@@ -12,7 +12,5 @@ public class RegisterRequest {
     private String homeAddress;
 
 
-    public void editContact(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+
 }

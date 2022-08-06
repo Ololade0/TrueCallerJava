@@ -1,7 +1,5 @@
 package africa.semicolon.trueCaller.services;
 
-import africa.semicolon.trueCaller.data.repositories.ContactRespository;
-import africa.semicolon.trueCaller.data.repositories.UserRepositoryImpl;
 import africa.semicolon.trueCaller.data.repositories.UserRespository;
 import africa.semicolon.trueCaller.data.repositories.models.Contact;
 import africa.semicolon.trueCaller.data.repositories.models.User;
@@ -12,26 +10,21 @@ import africa.semicolon.trueCaller.dtos.responses.AllContactResponse;
 import africa.semicolon.trueCaller.dtos.responses.RegisterUserResponse;
 import africa.semicolon.trueCaller.exception.UserExistsException;
 import africa.semicolon.trueCaller.utils.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class UserService implements iUserService {
-    private final UserRespository userRespository;
+    @Autowired
+    private  UserRespository userRespository;
+    @Autowired
     private iContactService contactService;
-
-    private ContactRespository contactRespository;
 
     public UserService(UserRespository userRespository, iContactService contactService) {
         this.userRespository = userRespository;
         this.contactService = contactService;
-        this.contactRespository = contactRespository;
-    }
-
-    public UserService() {
-        userRespository = new UserRepositoryImpl();
-        contactService = new ContactServicesImpl();
-        contactRespository = null;
     }
 
     @Override
@@ -46,10 +39,9 @@ public class UserService implements iUserService {
     }
 
     private void isExist(String email) {
-        User savedUser = userRespository.findByEmail(email);
+        User savedUser = userRespository.findUserByEmailAddress(email);
         if (savedUser != null) throw new UserExistsException(email + "Already exist");
     }
-
 
     @Override
     public AddContactResponse addContact(AddContactRequest request) {
@@ -63,7 +55,7 @@ public class UserService implements iUserService {
 
         Contact savedContact = contactService.addNewContact(contact);
 
-        User user = userRespository.findByEmail(request.getUserEmail());
+        User user = userRespository.findUserByEmailAddress(request.getUserEmail());
 
         user.getContacts().add(savedContact);
         userRespository.save(user);
@@ -74,18 +66,8 @@ public class UserService implements iUserService {
     }
 
     @Override
-    public int getNumberOfUsers() {
-        return userRespository.count();
-    }
-
-    @Override
-    public int size() {
-        return userRespository.count();
-    }
-
-    @Override
     public List<AllContactResponse> findContactBelongingTo(String userEmail) {
-        User user = userRespository.findByEmail(userEmail);
+        User user = userRespository.findUserByEmailAddress(userEmail);
         List<Contact>allUserContact = user.getContacts();
         List<AllContactResponse> response = new ArrayList<>();
         for(var contact : allUserContact){
@@ -99,7 +81,7 @@ public class UserService implements iUserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return userRespository.findByEmail(email);
+        return userRespository.findUserByEmailAddress(email);
     }
 
     @Override

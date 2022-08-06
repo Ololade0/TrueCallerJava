@@ -37,7 +37,6 @@ public class Main {
             for (var contact: contacts){
                 display(contact.toString());
             }
-
             displayMenu();
         }
 
