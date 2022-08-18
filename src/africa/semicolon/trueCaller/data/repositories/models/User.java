@@ -14,15 +14,19 @@ import java.util.List;
 public class User {
 @Id
     private String id;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String emailAddress;
-    private String homeAddress;
-@DBRef
+   private String fullName;
+   private String userName;
+   private String password;
+   private String email;
+
+
+    @DBRef
     private List<Contact> contacts = new ArrayList<>();
 
+
+    public List<Contact> showAllContacts() {
+        return contacts;
+    }
 
 
 

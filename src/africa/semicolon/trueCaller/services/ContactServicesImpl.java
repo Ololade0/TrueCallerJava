@@ -11,14 +11,20 @@ public class ContactServicesImpl implements iContactService {
     private ContactRespository contactRespository;
 
     public ContactServicesImpl(ContactRespository contactRespository){
+
         this.contactRespository = contactRespository;
     }
 
     @Override
     public Contact addNewContact(Contact contact) {
+
         return contactRespository.save(contact);
     }
 
+    @Override
+    public long totalContacts() {
+        return contactRespository.count();
+    }
 
 
 }

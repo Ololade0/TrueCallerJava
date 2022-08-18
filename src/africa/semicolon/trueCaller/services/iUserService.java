@@ -8,6 +8,7 @@ import africa.semicolon.trueCaller.dtos.responses.AllContactResponse;
 import africa.semicolon.trueCaller.dtos.responses.RegisterUserResponse;
 import africa.semicolon.trueCaller.data.repositories.models.Contact;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface  iUserService {
@@ -23,6 +24,10 @@ public interface  iUserService {
 
 
     void editContact(User user, Contact contact);
+
+    long totalUsers();
+
+    List<Contact> findAllUserContacts(String email);
 }
 
 

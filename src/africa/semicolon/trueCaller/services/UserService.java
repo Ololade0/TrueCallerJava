@@ -29,17 +29,17 @@ public class UserService implements iUserService {
 
     @Override
     public RegisterUserResponse register(RegisterRequest request) {
-        isExist(request.getEmailAddress());
+        isExist(request.getEmail());
         User user = new User();
         Mapper.map(request, user);
         userRespository.save(user);
         RegisterUserResponse response = new RegisterUserResponse();
-        response.setMessage(String.format(" %s Registration Successful", request.getEmailAddress()));
+        response.setMessage(String.format(" %s Registration Successful", request.getEmail()));
         return response  ;
     }
 
     private void isExist(String email) {
-        User savedUser = userRespository.findUserByEmailAddress(email);
+        User savedUser = userRespository.findByEmail(email);
         if (savedUser != null) throw new UserExistsException(email + "Already exist");
     }
 
@@ -55,7 +55,7 @@ public class UserService implements iUserService {
 
         Contact savedContact = contactService.addNewContact(contact);
 
-        User user = userRespository.findUserByEmailAddress(request.getUserEmail());
+        User user = userRespository.findByEmail(request.getUserEmail());
 
         user.getContacts().add(savedContact);
         userRespository.save(user);
@@ -67,7 +67,7 @@ public class UserService implements iUserService {
 
     @Override
     public List<AllContactResponse> findContactBelongingTo(String userEmail) {
-        User user = userRespository.findUserByEmailAddress(userEmail);
+        User user = userRespository.findByEmail(userEmail);
         List<Contact>allUserContact = user.getContacts();
         List<AllContactResponse> response = new ArrayList<>();
         for(var contact : allUserContact){
@@ -81,7 +81,7 @@ public class UserService implements iUserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return userRespository.findUserByEmailAddress(email);
+        return userRespository.findByEmail(email);
     }
 
     @Override
@@ -100,9 +100,20 @@ public class UserService implements iUserService {
         userRespository.save(user);
     }
 
+    @Override
+    public long totalUsers() {
+        return userRespository.count();
+    }
+
+    @Override
+    public List<Contact> findAllUserContacts(String email) {
+            User user = userRespository.findByEmail(email);
+            return user.showAllContacts();
+    }
+
 
     public void deleteContact(User user, Contact contact) {
         user.getContacts().remove(contact);
-        userRespository.save(user);
+       // userRespository.save(user);
     }
 }
